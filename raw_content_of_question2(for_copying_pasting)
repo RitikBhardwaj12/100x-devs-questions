@@ -1,0 +1,113 @@
+Rambir, a diligent mess worker, is responsible for distributing evening snacks to students each day. Due to the limited availability of snacks, it is imperative to ensure that each student only receives their allotted share. However, there have been instances where some students attempt to come back for a second serving, thereby depriving others of their fair share.
+
+To address this issue, Ritik has designed an advanced monitoring system for Rambir. This system is capable of identifying the first student who attempts to receive snacks more than once. Each student is assigned a unique identifier in the form of an integer.
+
+Your task is to develop an algorithm that processes an array of integers, where each integer represents a student ID. The algorithm should return the ID of the first student who is detected by the system as having attempted to receive snacks twice. This will enable Rambir to take corrective action against the student to prevent future occurrences.
+Input format:
+Output format:
+you are given a array which stores int(ids of students)
+return a interger,if there  is no student who came twice then return -1;
+HELP RAMBIR
+INPUT:
+arr=[4,1,2,6,8,3,1,3]
+Output:
+1
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Testcases:
+
+arr=[2, 5, 3, 7, 2, 1, 4]
+Expected Output: 2
+
+arr=[6, 7, 8, 6, 5, 2, 3, 8, 4]
+Expected Output: 6
+
+arr=[1, 2, 3, 1, 4, 5, 6, 7, 8, 9]
+Expected Output: 1
+
+arr=[9, 8, 7, 6, 5, 4, 3, 2, 1, 1]
+Expected Output: 1
+
+arr=[3, 3, 3, 3, 3, 3]
+Expected Output: 3
+
+arr=[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 20]
+Expected Output: 20
+
+arr=[5, 5, 5, 5, 5]
+Expected Output: 5
+
+arr=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+Expected Output: -1
+
+arr=[4, 3, 2, 1, 1, 2, 3, 4]
+Expected Output: 1
+
+arr=[100, 200, 300, 400, 100, 500, 600, 700, 800, 900, 1000, 200]
+Expected Output: 100
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Cpp code:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int catchTheCheater(vector<int> arr){
+    int n=arr.size();
+    unordered_set<int> record;
+    
+    for(int i=0;i<n;i++){
+        if(record.find(arr[i])!=record.end()){
+            return arr[i];
+        }
+        record.insert(arr[i]);
+    }
+    
+    return -1;
+}
+
+//driver code
+int main(){
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i=0;i<n;i++) cin >> arr[i];
+    
+    cout << catchTheCheater(arr);
+    
+    return 0;
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Java code:
+
+import java.util.*;
+public class CatchTheCheater {
+    public static int catchTheCheater(int[] arr) {
+        int n = arr.length;
+        Set<Integer> record = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            if (record.contains(arr[i])) {
+                return arr[i];
+            }
+            record.add(arr[i]);
+        }        
+        return -1;
+    }
+    
+    //driver code
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        int result = catchTheCheater(arr);
+        System.out.println(result);
+        
+        scanner.close();
+    }
+}
